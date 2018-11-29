@@ -1,0 +1,32 @@
+Arceus#Normal#0#Mythical
+Articuno#Ice$Flying#0#Legendary Bird
+Zapdos#Electric$Flying#0#Legendary Bird
+Moltres#Fire$Flying#0#Legendary Bird
+Mew#Psychic#0#Mythical
+Mewtwo#Phychic#0#Mythical
+Deoxys#Phychic#0#Mythical
+Raikou#Electric#0#Legendary Beast
+Entei#Fire#0#Legendary Beast
+Suicune#Water#0#Legendary Beast
+Ho-oh#Fire$Flying#0#Tower Duo
+Lugia#Psychic$Flying#0#Tower Duo
+Celebi#Psychic$Grass#0#Mythical
+Regirock#Rock#0#Legendary Titan
+Regice#Ice#0#Legendary Titan
+Registeel#Steel#0#Legendary Titan
+Regigigas#Normal#0#Legendary Titan
+Kyogre#Water#0#Weather Trio
+Groudon#Ground#0#Weather Trio
+Rayquaza#Dragon$Flying#0#Weather Trio
+Jirachi#Steel$Psychic#0#Mythical
+Azelf#Psychic#0#Lake Guardian
+Mesprit#Psychic#0#Lake Guardian
+Uxie#Psychic#0#Lake Guardian
+Dialga#Steel$Dragon#0#Creation Trio
+Palkia#Water$Dragon#0#Creation Trio
+Giratina#Ghost$Dragon#0#Creation Trio
+Darkrai#Dark#0#Mythical
+Cresselia#Psychic#0#Other
+Heatran#Fire$Steel#0#Other
+
+
