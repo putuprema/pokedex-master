@@ -1,5 +1,5 @@
 # Pokedex Master
-Pokedex Master is a simulation for a pokemon master who wants to conquer all legendary pokemons. 
+Pokedex Master is a console-based game for a pokemon master who wants to conquer all legendary pokemons. 
 
 ![Screenshot](docs/images/Capture.png)
 ## Features
