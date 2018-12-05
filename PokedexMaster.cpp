@@ -10,7 +10,7 @@
 
 char map[102][102]={}, playerOne[16], b, fileName[20];
 char pokemonName[31][50], pokemonType[31][50], pokemonCategory[31][50], pokemonTrade[31][50];
-int mapRow, mapLength, nameLength, coorX, coorY, money, pokemonCount[31]={}, tradeCount[31]={}, pokedexCount, random, pokeball, greatball, ultraball, masterball, tradeNo;
+int mapRow, mapLength, nameLength, coorX, coorY, money, pokemonCount[31]={}, tradeCount[31]={}, pokedexCount, random, pokeball, greatball, ultraball, masterball, tradeNo, pokedexFileCount=0;
 bool isCaught, isFlee, err;
 
 void init();
@@ -70,7 +70,7 @@ int main() {
 void cetakHeader() {
 	system("cls");
 	printf("###################################################################################\n");
-	printf("#                        Pokedex Master by Putu Prema (v1)                        #\n");
+	printf("#                       Pokedex Master by Putu Prema (v1.1)                       #\n");
 	printf("###################################################################################\n\n");	
 }
 
@@ -89,7 +89,7 @@ void helpMenu() {
 void init() {
 	coorX=coorY=1;
 	pokeball=greatball=ultraball=masterball=money=pokedexCount=tradeNo=err=0;
-	for (int i=1; i<=30; i++) {
+	for (int i=1; i<=pokedexFileCount; i++) {
 		pokemonCount[i] = 0; tradeCount[i] = 0;
 	}
 	// INIT FOR TRADE TESTING
@@ -137,7 +137,7 @@ void trade() {
 			else {
 				money += (1000*qty); printf("You got %d from trading your pokemon!\n", 1000*qty); printf("Press enter to continue..."); pauseScreen(); 
 				tradeCount[no] -= qty; pokedexCount--;
-				for (int i=1; i<=30; i++) {
+				for (int i=1; i<=pokedexFileCount; i++) {
 					if (pokemonCount[i] != 0) {
 						if (strcmp(pokemonTrade[no],pokemonName[i]) == 0) {
 							pokemonCount[i]=tradeCount[no];
@@ -334,7 +334,7 @@ void load() {
 		err=1; printf("Username not available.\n"); printf("Press enter to go back to main menu..."); fclose(fgame); pauseScreen();
 	} else {
 		fscanf(fgame, "%d#%d#%d#%d#%d\n", &money, &pokeball, &greatball, &ultraball, &masterball);
-		for (int i=1; i<=30; i++) {
+		for (int i=1; i<=pokedexFileCount; i++) {
 			fscanf(fgame, "%[^#]#%[^#]#%d#%[^\n]\n", dump, dump, &pokemonCount[i], dump);
 			pokedexCount += pokemonCount[i];
 			if (pokemonCount[i] != 0) {
@@ -461,7 +461,7 @@ void attack(int z, int y) {
 }
 
 void pokemonEncounter() {
-	int menuAttack, pokemonNo = 1 + rand() / (RAND_MAX / (30 - 1 + 1) + 1), length=strlen(pokemonName[pokemonNo]);
+	int menuAttack, pokemonNo = 1 + rand() / (RAND_MAX / (pokedexFileCount - 1 + 1) + 1), length=strlen(pokemonName[pokemonNo]);
 	printf("You have encountered a wild legendary pokemon\nPress enter to continue...");
 	pauseScreen(); cetakHeader(); printf("Wild %s has appeared!", pokemonName[pokemonNo]); pauseScreen();
 	attackMenu:
@@ -531,7 +531,7 @@ void saveGame() {
 	FILE *fgame;
 	fgame = fopen(fileName, "w+");
 	fprintf(fgame, "%d#%d#%d#%d#%d\n", money, pokeball, greatball, ultraball, masterball);
-	for (int i=1; i<=30; i++) {
+	for (int i=1; i<=pokedexFileCount; i++) {
 		if (pokemonCount[i] == 0) fprintf(fgame, "?????#???#0#?????");
 		else fprintf(fgame, "%s#%s#%d#%s", pokemonName[i], pokemonType[i], pokemonCount[i], pokemonCategory[i]);
 		fprintf(fgame, "\n");
@@ -594,10 +594,14 @@ void printMap() {
 void readPokedex() {
 	FILE *fpoke;
 	fpoke = fopen("pokedex.txt", "r");
-	for (int i=1; i<=30; i++) {
-		fscanf(fpoke, "%[^#]#%[^#]#%d#%[^\n]\n", pokemonName[i], pokemonType[i], &pokemonCount[i], pokemonCategory[i]);
+	// for (int i=1; i<=30; i++) {
+	// 	fscanf(fpoke, "%[^#]#%[^#]#%d#%[^\n]\n", pokemonName[i], pokemonType[i], &pokemonCount[i], pokemonCategory[i]);
+	// }
+	while (!feof(fpoke)) {
+		pokedexFileCount++;
+		fscanf(fpoke, "%[^#]#%[^#]#%d#%[^\n]\n", pokemonName[pokedexFileCount], pokemonType[pokedexFileCount], &pokemonCount[pokedexFileCount], pokemonCategory[pokedexFileCount]);
 	}
-	for (int i=1; i<=30; i++) {
+	for (int i=1; i<=pokedexFileCount; i++) {
 		int length = strlen(pokemonType[i]);
 		for (int j=0; j<length; j++) {
 			if (pokemonType[i][j] == '$') {
